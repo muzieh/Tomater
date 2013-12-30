@@ -84,7 +84,7 @@ namespace Tomater
 
 		private void buttonWork_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(0).AddSeconds(5);
+			endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
 			Working = true;
 			timer.Start();
