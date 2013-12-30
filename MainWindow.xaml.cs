@@ -108,10 +108,9 @@ namespace Tomater
 
 		private void buttonVoid_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
+			timer.Stop();
 			textDateDisplay.Text = "00:00";
-			Working = true;
-			timer.Start();
+			Working = false;
 			
 		}
 	}
