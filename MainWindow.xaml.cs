@@ -22,7 +22,31 @@ namespace Tomater
 	{
 		DateTime endTime;
 		DispatcherTimer timer;
-
+		private bool _working;
+		private bool Working {
+			get
+			{
+				return _working;
+			}
+			set
+			{
+				_working = value;
+				buttonVoid.IsEnabled = value;
+			}
+		}
+		private int _finished = 0;
+		private int Finished
+		{
+			get
+			{
+				return _finished;
+			}
+			set
+			{
+				_finished = value;
+				this.Title =  "Tomater + " + _finished;
+			}
+		}
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -30,6 +54,7 @@ namespace Tomater
 			timer.Tick += new EventHandler(timer_Tick);
 			timer.Interval = new TimeSpan(0, 0, 1);
 			timer.Stop();
+			buttonVoid.IsEnabled = false;
 		}
 
 		void timer_Tick(object sender, EventArgs e)
@@ -40,6 +65,11 @@ namespace Tomater
 			{
 				textDateDisplay.Foreground = Brushes.Red;
 				textDateDisplay.Text = "- " + formatTime(delta);
+				if (Working)
+				{
+					Finished++;
+					Working = false;
+				}
 			}
 			else
 			{
@@ -54,8 +84,9 @@ namespace Tomater
 
 		private void buttonWork_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
+			endTime = DateTime.Now.AddMinutes(0).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
+			Working = true;
 			timer.Start();
 		}
 
@@ -63,6 +94,7 @@ namespace Tomater
 		{
 			endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
+			Working = false;
 			timer.Start();
 		}
 
@@ -70,7 +102,17 @@ namespace Tomater
 		{
 			endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
+			Working = false;
 			timer.Start();
+		}
+
+		private void buttonVoid_Click(object sender, RoutedEventArgs e)
+		{
+			endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
+			textDateDisplay.Text = "00:00";
+			Working = true;
+			timer.Start();
+			
 		}
 	}
 }
