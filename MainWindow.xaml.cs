@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Media;
 
 namespace Tomater
 {
@@ -20,8 +21,10 @@ namespace Tomater
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		DateTime endTime;
-		DispatcherTimer timer;
+		DateTime _endTime;
+		DispatcherTimer _timer;
+		SoundPlayer _soundPlayer;
+
 		private bool _working;
 		private bool Working {
 			get
@@ -50,16 +53,17 @@ namespace Tomater
 		public MainWindow()
 		{
 			InitializeComponent();
-			timer = new DispatcherTimer();
-			timer.Tick += new EventHandler(timer_Tick);
-			timer.Interval = new TimeSpan(0, 0, 1);
-			timer.Stop();
+			_soundPlayer = new SoundPlayer();
+			_timer = new DispatcherTimer();
+			_timer.Tick += new EventHandler(timer_Tick);
+			_timer.Interval = new TimeSpan(0, 0, 1);
+			_timer.Stop();
 			buttonVoid.IsEnabled = false;
 		}
 
 		void timer_Tick(object sender, EventArgs e)
 		{
-			var delta = endTime.Subtract(DateTime.Now);
+			var delta = _endTime.Subtract(DateTime.Now);
 
 			if (delta.Seconds < 0 || delta.Minutes < 0)
 			{
@@ -70,6 +74,7 @@ namespace Tomater
 					Finished++;
 					Working = false;
 				}
+				FinishBell();
 			}
 			else
 			{
@@ -78,37 +83,52 @@ namespace Tomater
 			}
 		}
 
+		private void FinishBell()
+		{
+			_soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"EndBell.wav");
+			_soundPlayer.Play();
+		}
+
+		private void StartBell()
+		{
+			_soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"StartBell.wav");
+			_soundPlayer.Play();
+		}
+
 		private string formatTime (TimeSpan span) {
 			return span.ToString("mm") + ":" + span.ToString("ss");			
 		}
 
 		private void buttonWork_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
+			_endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
 			Working = true;
-			timer.Start();
+			StartBell();
+			_timer.Start();
 		}
 
 		private void buttonLong_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
+			_endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
 			Working = false;
-			timer.Start();
+			StartBell();
+			_timer.Start();
 		}
 
 		private void buttonShort_Click(object sender, RoutedEventArgs e)
 		{
-			endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
+			_endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
 			textDateDisplay.Text = "00:00";
 			Working = false;
-			timer.Start();
+			StartBell();
+			_timer.Start();
 		}
 
 		private void buttonVoid_Click(object sender, RoutedEventArgs e)
 		{
-			timer.Stop();
+			_timer.Stop();
 			textDateDisplay.Text = "00:00";
 			Working = false;
 			

@@ -15,5 +15,5 @@
 		<StackPanel ><Button Content="Void"  Width="75" Name="buttonVoid" Click="buttonVoid_Click" /></StackPanel>
 		
 	</StackPanel>
-		
+	
 </Window>
