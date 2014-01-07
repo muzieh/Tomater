@@ -73,8 +73,9 @@ namespace Tomater
 				{
 					Finished++;
 					Working = false;
+					FinishBell();
 				}
-				FinishBell();
+				
 			}
 			else
 			{
