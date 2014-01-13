@@ -12,7 +12,9 @@
 			<Button Content="Short br" Height="23" Name="buttonShort" Width="65" Click="buttonShort_Click" />
 			<Button Content="Long br" Height="23" Name="buttonLong" Width="65" Click="buttonLong_Click" />
 		</StackPanel>
-		<StackPanel ><Button Content="Void"  Width="65" Name="buttonVoid" Click="buttonVoid_Click" /></StackPanel>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center"><Button Content="Void"  Width="65" Name="buttonVoid" Click="buttonVoid_Click" />
+			<Button Content="Tasks" Name="buttonTasks" Width="65" Click="buttonTasks_Click" />
+		</StackPanel>
 		
 	</StackPanel>
 	

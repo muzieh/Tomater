@@ -134,5 +134,12 @@ namespace Tomater
 			Working = false;
 			
 		}
+
+
+		private void buttonTasks_Click(object sender, RoutedEventArgs e)
+		{
+			Tasks tasks = new Tasks();
+			tasks.Show();
+		}
 	}
 }
