@@ -1,19 +1,69 @@
 ﻿<Window x:Class="Tomater.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Tomater" Height="148" Width="243" Opacity="1" BorderBrush="#FF963636" BorderThickness="2"
+        Title="Tomater" Height="119" Width="120" Opacity="1" BorderBrush="#FF963636" BorderThickness="1"
 		Style="{StaticResource {x:Type Window}}"
     WindowStartupLocation="CenterScreen" Topmost="True">
    
-		<StackPanel Name="stackPanel3" Orientation="Vertical" Margin="5">
-			<TextBlock  Name="textDateDisplay" Text="00:00" FontFamily="Courier New" FontSize="40" HorizontalAlignment="Center" />
+		<StackPanel Name="stackPanel3" Orientation="Vertical" Margin="5" Height="70" Width="86">
+		<StackPanel.Resources>
+			<Style TargetType="{x:Type Button}">
+				<Setter Property="Margin" Value="3,3,3,3"/>
+				<Setter Property="Cursor" Value="Hand"/>
+			</Style>
+		</StackPanel.Resources>
+		<TextBlock  Name="textDateDisplay" Text="00:00" FontFamily="Courier New" FontSize="22" HorizontalAlignment="Center" />
 			<StackPanel Name="stackPanel2"  Orientation="Horizontal"  HorizontalAlignment="Center">
-			<Button Content="Work" Height="23" Name="buttonWork" Width="65" Click="buttonWork_Click"/>
-			<Button Content="Short br" Height="23" Name="buttonShort" Width="65" Click="buttonShort_Click" />
-			<Button Content="Long br" Height="23" Name="buttonLong" Width="65" Click="buttonLong_Click" />
+			<Button  Click="buttonWork_Click" >
+				<Button.Template>
+					<ControlTemplate>
+						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+							<Image Source="hourglass.png" />
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+			<Button   Click="buttonShort_Click">
+				<Button.Template>
+					<ControlTemplate>
+						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+							<Image Source="controller.png" />
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+			<Button Click="buttonLong_Click" >
+				<Button.Template>
+					<ControlTemplate>
+						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+							<Image Source="controller_add.png" />
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+
 		</StackPanel>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center"><Button Content="Void"  Width="65" Name="buttonVoid" Click="buttonVoid_Click" />
-			<Button Content="Tasks" Name="buttonTasks" Width="65" Click="buttonTasks_Click" />
+		
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button x:Name="buttonVoid" Click="buttonVoid_Click"  >
+				<Button.Template>
+					<ControlTemplate>
+						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+							<Image Source="stop.png" />
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+			<Button Click="buttonTasks_Click" >
+				<Button.Template>
+					<ControlTemplate>
+						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+							<Image Source="table.png" />
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+
 		</StackPanel>
 		
 	</StackPanel>

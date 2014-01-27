@@ -107,9 +107,14 @@
     <Resource Include="Tomato.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="controller.png" />
+    <Resource Include="controller_add.png" />
     <Content Include="EndBell.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="table.png" />
+    <Resource Include="stop.png" />
+    <Resource Include="hourglass.png" />
     <Content Include="StartBell.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
