@@ -58,10 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CounterStatus.cs" />
+    <Compile Include="RealTimer.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TomaterTimer.cs" />
+    <Compile Include="ITimer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

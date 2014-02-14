@@ -68,7 +68,7 @@ namespace Tomater
 			if (delta.Seconds < 0 || delta.Minutes < 0)
 			{
 				textDateDisplay.Foreground = Brushes.Red;
-				textDateDisplay.Text = "- " + formatTime(delta);
+				textDateDisplay.Text = "-" + formatTime(delta);
 				if (Working)
 				{
 					Finished++;
