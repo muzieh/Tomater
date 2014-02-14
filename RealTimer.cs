@@ -17,6 +17,6 @@ namespace Tomater
 			throw new NotImplementedException();
 		}
 
-		public event EventHandler Tick;
+		public event TimerEventHandler Tick;
 	}
 }

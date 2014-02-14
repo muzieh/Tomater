@@ -12,6 +12,12 @@ namespace Tomater
 		public TomaterTimer(ITimer timer)
 		{
 			_timer = timer;
+			_timer.Tick += new TimerEventHandler(TimerTick);
+		}
+
+		void TimerTick(object sender, TimerEventArgs e)
+		{
+			RemainingTime -= e.TimeElapsed;
 		}
 
 
