@@ -24,6 +24,7 @@ namespace Tomater
 		DateTime _endTime;
 		DispatcherTimer _timer;
 		SoundPlayer _soundPlayer;
+		TomaterTimer _tomater;
 
 		private bool _working;
 		private bool Working {

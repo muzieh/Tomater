@@ -3,10 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomater", "Tomater.csproj", "{B79A0219-947A-486F-8765-CBCF7B5BD889}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomaterTests", "..\TomaterTests\TomaterTests.csproj", "{1EBF92A7-82F4-4040-8997-4D4988DDA3D1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B79A0219-947A-486F-8765-CBCF7B5BD889} = {B79A0219-947A-486F-8765-CBCF7B5BD889}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomaterTests", "TomaterTests\TomaterTests.csproj", "{1EBF92A7-82F4-4040-8997-4D4988DDA3D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

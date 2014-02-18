@@ -15,11 +15,16 @@ namespace Tomater
 			_timer.Tick += new TimerEventHandler(TimerTick);
 		}
 
+		public TomaterTimer()
+		{
+			_timer = new RealTimer();
+			_timer.Tick += TimerTick;
+		}
+
 		void TimerTick(object sender, TimerEventArgs e)
 		{
 			RemainingTime -= e.TimeElapsed;
 		}
-
 
 		public void StartWork()
 		{
@@ -33,6 +38,19 @@ namespace Tomater
 		public void Stop()
 		{
 			CurrentState = CounterStatus.Stopped;
+			_timer.Stop();
+		}
+
+		public void StartBreak()
+		{
+			RemainingTime = TimeSpan.FromMinutes(5);
+			CurrentState = CounterStatus.Break;
+		}
+
+		public void StartLongBreak()
+		{
+			RemainingTime = TimeSpan.FromMinutes(25);
+			CurrentState = CounterStatus.LongBreak;
 		}
 	}
 }
