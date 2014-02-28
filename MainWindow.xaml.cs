@@ -62,14 +62,22 @@ namespace Tomater
 			buttonVoid.IsEnabled = false;
 		}
 
+		public MainWindow(ITimer tomater)
+		{
+			// TODO: Complete member initialization
+			InitializeComponent();
+			_tomater = new TomaterTimer(tomater);
+			//TextRemainingTime.Text = _tomater.RemainingTime.ToString();
+		}
+
 		void timer_Tick(object sender, EventArgs e)
 		{
 			var delta = _endTime.Subtract(DateTime.Now);
 
 			if (delta.Seconds < 0 || delta.Minutes < 0)
 			{
-				textDateDisplay.Foreground = Brushes.Red;
-				textDateDisplay.Text = "-" + formatTime(delta);
+				TextRemainingTime.Foreground = Brushes.Red;
+				TextRemainingTime.Text = "-" + formatTime(delta);
 				if (Working)
 				{
 					Finished++;
@@ -80,8 +88,8 @@ namespace Tomater
 			}
 			else
 			{
-				textDateDisplay.Foreground = Brushes.Black;
-				textDateDisplay.Text = formatTime(delta);
+				TextRemainingTime.Foreground = Brushes.Black;
+				TextRemainingTime.Text = formatTime(delta);
 			}
 		}
 
@@ -104,7 +112,7 @@ namespace Tomater
 		private void buttonWork_Click(object sender, RoutedEventArgs e)
 		{
 			_endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
-			textDateDisplay.Text = "00:00";
+			TextRemainingTime.Text = "00:00";
 			Working = true;
 			StartBell();
 			_timer.Start();
@@ -113,7 +121,7 @@ namespace Tomater
 		private void buttonLong_Click(object sender, RoutedEventArgs e)
 		{
 			_endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
-			textDateDisplay.Text = "00:00";
+			TextRemainingTime.Text = "00:00";
 			Working = false;
 			StartBell();
 			_timer.Start();
@@ -122,7 +130,7 @@ namespace Tomater
 		private void buttonShort_Click(object sender, RoutedEventArgs e)
 		{
 			_endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
-			textDateDisplay.Text = "00:00";
+			TextRemainingTime.Text = "00:00";
 			Working = false;
 			StartBell();
 			_timer.Start();
@@ -131,7 +139,7 @@ namespace Tomater
 		private void buttonVoid_Click(object sender, RoutedEventArgs e)
 		{
 			_timer.Stop();
-			textDateDisplay.Text = "00:00";
+			TextRemainingTime.Text = "00:00";
 			Working = false;
 			
 		}

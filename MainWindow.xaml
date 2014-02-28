@@ -12,7 +12,7 @@
 				<Setter Property="Cursor" Value="Hand"/>
 			</Style>
 		</StackPanel.Resources>
-		<TextBlock  Name="textDateDisplay" Text="00:00" FontFamily="Courier New" FontSize="22" HorizontalAlignment="Center" />
+		<TextBlock  Name="TextRemainingTime" Text="00:00" FontFamily="Courier New" FontSize="22" HorizontalAlignment="Center" />
 			<StackPanel Name="stackPanel2"  Orientation="Horizontal"  HorizontalAlignment="Center">
 			<Button  Click="buttonWork_Click" >
 				<Button.Template>
