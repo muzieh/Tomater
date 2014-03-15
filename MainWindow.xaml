@@ -14,7 +14,7 @@
 		</StackPanel.Resources>
 		<TextBlock  Name="TextRemainingTime" Text="00:00" FontFamily="Courier New" FontSize="22" HorizontalAlignment="Center" />
 			<StackPanel Name="stackPanel2"  Orientation="Horizontal"  HorizontalAlignment="Center">
-			<Button  Click="buttonWork_Click" >
+			<Button  Click="ButtonWorkClick" >
 				<Button.Template>
 					<ControlTemplate>
 						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -23,7 +23,7 @@
 					</ControlTemplate>
 				</Button.Template>
 			</Button>
-			<Button   Click="buttonShort_Click">
+			<Button   Click="ButtonShortClick">
 				<Button.Template>
 					<ControlTemplate>
 						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -32,7 +32,7 @@
 					</ControlTemplate>
 				</Button.Template>
 			</Button>
-			<Button Click="buttonLong_Click" >
+			<Button Click="ButtonLongClick" >
 				<Button.Template>
 					<ControlTemplate>
 						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -45,7 +45,7 @@
 		</StackPanel>
 		
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button x:Name="buttonVoid" Click="buttonVoid_Click"  >
+			<Button x:Name="buttonVoid" Click="ButtonVoidClick"  >
 				<Button.Template>
 					<ControlTemplate>
 						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -54,7 +54,7 @@
 					</ControlTemplate>
 				</Button.Template>
 			</Button>
-			<Button Click="buttonTasks_Click" >
+			<Button Click="ButtonTasksClick" >
 				<Button.Template>
 					<ControlTemplate>
 						<Border HorizontalAlignment="Center" VerticalAlignment="Center" >

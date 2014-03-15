@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Tomater
 {
 	public class TomaterTimer
 	{
-		ITimer _timer;
-		public CounterStatus CurrentState { get; set; }
+        readonly ITimer _timer;
+
+        public CounterStatus CurrentState { get; set; }
+
 		public TomaterTimer(ITimer timer)
 		{
 			_timer = timer;

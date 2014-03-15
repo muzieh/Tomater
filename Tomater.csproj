@@ -64,6 +64,8 @@
     <Compile Include="Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimerEventArgs.cs" />
+    <Compile Include="TimerEventHandler.cs" />
     <Compile Include="TomaterTimer.cs" />
     <Compile Include="ITimer.cs" />
     <Page Include="MainWindow.xaml">

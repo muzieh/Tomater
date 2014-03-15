@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace TomaterTests
@@ -11,9 +9,9 @@ namespace TomaterTests
 		[STAThread]
 		static void Main(string[] args)
 		{
-			string[] my_args = { Assembly.GetExecutingAssembly().Location };
+			string[] myArgs = { Assembly.GetExecutingAssembly().Location };
 
-			int returnCode = NUnit.ConsoleRunner.Runner.Main(my_args);
+			int returnCode = NUnit.ConsoleRunner.Runner.Main(myArgs);
 
 			if (returnCode != 0)
 				Console.Beep();

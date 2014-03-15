@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Tomater
 {
@@ -42,18 +34,18 @@ namespace Tomater
 				return _taskList;
 			}
 		}
-		private void buttonAdd_Click(object sender, RoutedEventArgs e)
+		private void ButtonAddClick(object sender, RoutedEventArgs e)
 		{
 			TaskList.Add(new Task(textTask.Text));
 		}
 
 		private Task CurrentItem { get; set; }
-		private void dataGrid1_CurrentCellChanged(object sender, EventArgs e)
+		private void DataGrid1CurrentCellChanged(object sender, EventArgs e)
 		{
 			CurrentItem = dataGrid1.CurrentItem as Task;
 		}
 
-		private void buttonDelete_Click(object sender, RoutedEventArgs e)
+		private void ButtonDeleteClick(object sender, RoutedEventArgs e)
 		{
 			
 			if (CurrentItem == null)
