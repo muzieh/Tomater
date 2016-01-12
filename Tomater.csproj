@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ClicableCommand.cs" />
+    <Compile Include="Commands\StartCommand.cs" />
     <Compile Include="CounterStatus.cs" />
     <Compile Include="RealTimer.cs" />
     <Compile Include="Task.cs" />

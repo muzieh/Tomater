@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Media;
+using Tomater.Commands;
 
 namespace Tomater
 {
@@ -51,9 +52,14 @@ namespace Tomater
 				this.Title =  "Tomater + " + _finished;
 			}
 		}
+
+		StartCommand _startCommand;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			
+			_startCommand = new StartCommand(WorkButton, this);
 			_soundPlayer = new SoundPlayer();
 			_timer = new DispatcherTimer();
 			_timer.Tick += new EventHandler(timer_Tick);
@@ -109,7 +115,7 @@ namespace Tomater
 			return span.ToString("mm") + ":" + span.ToString("ss");			
 		}
 
-		private void buttonWork_Click(object sender, RoutedEventArgs e)
+		public void Work()
 		{
 			_endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
 			TextRemainingTime.Text = "00:00";
@@ -118,7 +124,7 @@ namespace Tomater
 			_timer.Start();
 		}
 
-		private void buttonLong_Click(object sender, RoutedEventArgs e)
+		private void ButtonLongClick(object sender, RoutedEventArgs e)
 		{
 			_endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
 			TextRemainingTime.Text = "00:00";
@@ -127,7 +133,7 @@ namespace Tomater
 			_timer.Start();
 		}
 
-		private void buttonShort_Click(object sender, RoutedEventArgs e)
+		private void ButtonShortClick(object sender, RoutedEventArgs e)
 		{
 			_endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
 			TextRemainingTime.Text = "00:00";
@@ -136,7 +142,7 @@ namespace Tomater
 			_timer.Start();
 		}
 
-		private void buttonVoid_Click(object sender, RoutedEventArgs e)
+		private void ButtonVoidClick(object sender, RoutedEventArgs e)
 		{
 			_timer.Stop();
 			TextRemainingTime.Text = "00:00";
@@ -145,7 +151,7 @@ namespace Tomater
 		}
 
 
-		private void buttonTasks_Click(object sender, RoutedEventArgs e)
+		private void ButtonTasksClick(object sender, RoutedEventArgs e)
 		{
 			Tasks tasks = new Tasks();
 			tasks.Show();
