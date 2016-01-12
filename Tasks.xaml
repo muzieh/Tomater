@@ -7,12 +7,12 @@
 			<RowDefinition />
 			<RowDefinition MaxHeight="40" MinHeight="40"/>
 		</Grid.RowDefinitions>
-		<DataGrid AutoGenerateColumns="True" Name="dataGrid1" CurrentCellChanged="dataGrid1_CurrentCellChanged">
+		<DataGrid AutoGenerateColumns="True" Name="dataGrid1" CurrentCellChanged="DataGrid1CurrentCellChanged">
 		</DataGrid>
 		<StackPanel Grid.Row="1" Name="stackPanel1" Orientation="Horizontal">
 			<TextBox Height="23" Name="textTask" Width="150" />
-			<Button Content="Add" Height="23" Name="buttonAdd" Width="50" Click="buttonAdd_Click" />
-			<Button Content="Del " Height="23" Name="buttonDelete" Width="50" Click="buttonDelete_Click" />
+			<Button Content="Add" Height="23" Name="buttonAdd" Width="50" Click="ButtonAddClick" />
+			<Button Content="Del " Height="23" Name="buttonDelete" Width="50" Click="ButtonDeleteClick" />
 		</StackPanel>
 	</Grid>
 </Window>

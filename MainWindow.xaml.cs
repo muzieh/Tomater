@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Media;
 using Tomater.Commands;
@@ -62,7 +53,7 @@ namespace Tomater
 			_startCommand = new StartCommand(WorkButton, this);
 			_soundPlayer = new SoundPlayer();
 			_timer = new DispatcherTimer();
-			_timer.Tick += new EventHandler(timer_Tick);
+			_timer.Tick += new EventHandler(TimerTick);
 			_timer.Interval = new TimeSpan(0, 0, 1);
 			_timer.Stop();
 			buttonVoid.IsEnabled = false;
@@ -76,14 +67,14 @@ namespace Tomater
 			//TextRemainingTime.Text = _tomater.RemainingTime.ToString();
 		}
 
-		void timer_Tick(object sender, EventArgs e)
+		void TimerTick(object sender, EventArgs e)
 		{
 			var delta = _endTime.Subtract(DateTime.Now);
 
 			if (delta.Seconds < 0 || delta.Minutes < 0)
 			{
 				TextRemainingTime.Foreground = Brushes.Red;
-				TextRemainingTime.Text = "-" + formatTime(delta);
+				TextRemainingTime.Text = "-" + FormatTime(delta);
 				if (Working)
 				{
 					Finished++;
@@ -95,7 +86,7 @@ namespace Tomater
 			else
 			{
 				TextRemainingTime.Foreground = Brushes.Black;
-				TextRemainingTime.Text = formatTime(delta);
+				TextRemainingTime.Text = FormatTime(delta);
 			}
 		}
 
@@ -111,7 +102,7 @@ namespace Tomater
 			_soundPlayer.Play();
 		}
 
-		private string formatTime (TimeSpan span) {
+		private string FormatTime (TimeSpan span) {
 			return span.ToString("mm") + ":" + span.ToString("ss");			
 		}
 
