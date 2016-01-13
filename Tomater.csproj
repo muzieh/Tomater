@@ -29,7 +29,7 @@
     <InstallUrl>http://tools.oversoft.pl/app/Tomater/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -58,7 +58,7 @@
     <ApplicationIcon>Tomato.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2F5C6CE80B3FD445B97ED549EFD1985C8FA1E046</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>58586571B26C6304FD039586B0FC24EEAC83F0E6</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Tomater_TemporaryKey.pfx</ManifestKeyFile>
@@ -68,6 +68,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tomater.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,6 +147,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Tomater.pfx" />
     <None Include="Tomater_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,10 @@ namespace Tomater
 		public MainWindow()
 		{
 			InitializeComponent();
-			
+			this.Loaded += new RoutedEventHandler(Window_Loaded);
+			this.MouseMove += MainWindow_MouseMove;
+			this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
+			this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
 			_startCommand = new StartCommand(WorkButton, this);
 			_soundPlayer = new SoundPlayer();
 			_timer = new DispatcherTimer();
@@ -57,6 +60,36 @@ namespace Tomater
 			_timer.Interval = new TimeSpan(0, 0, 1);
 			_timer.Stop();
 			buttonVoid.IsEnabled = false;
+		}
+
+		public bool dragAction = false;
+
+		void MainWindow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			dragAction = false;
+
+		}
+
+		void MainWindow_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			dragAction = true;
+		}
+
+		void MainWindow_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			if(dragAction)
+			{
+				var position = e.GetPosition(this.WorkButton);
+				this.Left += position.X;
+				this.Top += position.Y;
+			}
+		}
+ 
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+			this.Left = desktopWorkingArea.Right - this.Width;
+			this.Top = desktopWorkingArea.Bottom - this.Height;
 		}
 
 		public MainWindow(ITimer tomater)
