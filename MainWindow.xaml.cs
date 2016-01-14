@@ -45,9 +45,8 @@ namespace Tomater
 			InitializeComponent();
 			_currentState = TimerState.Idle;
 			this.Loaded += new RoutedEventHandler(Window_Loaded);
-			this.MouseMove += MainWindow_MouseMove;
 			this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-			this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
+
 			_startCommand = new StartCommand(WorkButton, this);
 			_shortBreakCommand = new ShortBreakCommand(ShortBreakButton, this);
 
@@ -59,12 +58,6 @@ namespace Tomater
 
 		}
 
-		public bool dragAction = false;
-
-		void MainWindow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			dragAction = false;
-		}
 
 		private void ResetTimer()
 		{
@@ -77,17 +70,7 @@ namespace Tomater
 
 		void MainWindow_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			dragAction = true;
-		}
-
-		void MainWindow_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-		{
-			if(dragAction)
-			{
-				var position = e.GetPosition(this.WorkButton);
-				this.Left += position.X;
-				this.Top += position.Y;
-			}
+			DragMove();
 		}
  
 		private void Window_Loaded(object sender, RoutedEventArgs e)
