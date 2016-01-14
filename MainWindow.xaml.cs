@@ -108,7 +108,7 @@ namespace Tomater
 		{
 			_timer.Stop();
 			this.FinishBell();
-			await Task.Delay(1000);
+			await Task.Delay(3000);
 			switch(_currentState)
 			{
 				case TimerState.Working:
