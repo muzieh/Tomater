@@ -46,7 +46,7 @@ namespace Tomater
 			_currentState = TimerState.Idle;
 			this.Loaded += new RoutedEventHandler(Window_Loaded);
 			this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-
+			TextRemainingTime.MouseLeftButtonDown += TextRemainingTime_MouseLeftButtonDown;
 			_startCommand = new StartCommand(WorkButton, this);
 			_shortBreakCommand = new ShortBreakCommand(ShortBreakButton, this);
 
@@ -56,6 +56,11 @@ namespace Tomater
 			_timer.Interval = new TimeSpan(0, 0, 1);
 			this.ResetTimer();
 
+		}
+
+		void TextRemainingTime_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			;
 		}
 
 
