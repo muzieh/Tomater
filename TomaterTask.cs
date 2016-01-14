@@ -3,21 +3,21 @@ using System.Linq;
 
 namespace Tomater
 {
-	public class Task
+	public class TomaterTask
 	{
-		public Task()
+		public TomaterTask()
 		{
 			Id = Guid.NewGuid();
 			Name = "<TODO>";
 		}
 
-		public Task(Guid guid, string name)
+		public TomaterTask(Guid guid, string name)
 		{
 			Id = guid;
 			Name = name;
 		}
 
-		public Task(string name)
+		public TomaterTask(string name)
 		{
 			Id = Guid.NewGuid();
 			Name = name;

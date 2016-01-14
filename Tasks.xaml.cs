@@ -20,15 +20,15 @@ namespace Tomater
 			dataGrid1.ItemsSource = TaskList; 
 		}
 
-		List<Task> _taskList;
-		List<Task> TaskList
+		List<TomaterTask> _taskList;
+		List<TomaterTask> TaskList
 		{
 			get {
 				if (_taskList == null)
 				{
-					_taskList = new List<Task>();
-					_taskList.Add(new Task());
-					_taskList.Add(new Task());
+					_taskList = new List<TomaterTask>();
+					_taskList.Add(new TomaterTask());
+					_taskList.Add(new TomaterTask());
 				}
 
 				return _taskList;
@@ -36,13 +36,13 @@ namespace Tomater
 		}
 		private void ButtonAddClick(object sender, RoutedEventArgs e)
 		{
-			TaskList.Add(new Task(textTask.Text));
+			TaskList.Add(new TomaterTask(textTask.Text));
 		}
 
-		private Task CurrentItem { get; set; }
+		private TomaterTask CurrentItem { get; set; }
 		private void DataGrid1CurrentCellChanged(object sender, EventArgs e)
 		{
-			CurrentItem = dataGrid1.CurrentItem as Task;
+			CurrentItem = dataGrid1.CurrentItem as TomaterTask;
 		}
 
 		private void ButtonDeleteClick(object sender, RoutedEventArgs e)
