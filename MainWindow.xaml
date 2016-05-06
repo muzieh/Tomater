@@ -19,7 +19,7 @@
 		<ProgressBar Name="progressBar" Height="10" Maximum="25" Value="20"/>
 		<TextBlock  Name="TextRemainingTime" Text="00:00" FontFamily="Courier New" FontSize="22" HorizontalAlignment="Center" Foreground="#FF303633" Margin="0" LineHeight="9" Padding="3" >
 			<TextBlock.Background>
-				<SolidColorBrush Color="#FFECECEC" Opacity="0.7"/>
+				<SolidColorBrush Color="#FFECECEC" Opacity="0.5"/>
 			</TextBlock.Background>
 		</TextBlock>
 		<StackPanel Name="stackPanel2"  Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,1,0,0">
