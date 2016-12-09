@@ -15,30 +15,15 @@ namespace Tomater
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-
-		public enum TimerState {Idle, Working, ShortBreak}
-		DateTime _endTime;
-		DispatcherTimer _timer;
-		SoundPlayer _soundPlayer;
+		private enum TimerState {Idle, Working, ShortBreak}
+		private DateTime _endTime;
+		private readonly DispatcherTimer _timer;
+		private readonly SoundPlayer _soundPlayer;
+		private readonly SoundPlayer _continousPlayer;
 		TomaterTimer _tomater;
-		TimerState _currentState;
+		private TimerState _currentState;
 
-		private int _finished = 0;
-		private int Finished
-		{
-			get
-			{
-				return _finished;
-			}
-			set
-			{
-				_finished = value;
-				this.Title =  "Tomater + " + _finished;
-			}
-		}
-
-		StartCommand _startCommand;
-		ShortBreakCommand _shortBreakCommand;
+		private ShortBreakCommand _shortBreakCommand;
 
 		public MainWindow()
 		{
@@ -47,10 +32,12 @@ namespace Tomater
 			this.Loaded += new RoutedEventHandler(Window_Loaded);
 			this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 			TextRemainingTime.MouseLeftButtonDown += TextRemainingTime_MouseLeftButtonDown;
-			_startCommand = new StartCommand(WorkButton, this);
+			new StartCommand(WorkButton, this);
 			_shortBreakCommand = new ShortBreakCommand(ShortBreakButton, this);
 
 			_soundPlayer = new SoundPlayer();
+			_continousPlayer = new SoundPlayer(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"tickingSound.wav"));
+
 			_timer = new DispatcherTimer();
 			_timer.Tick += new EventHandler(TimerTick);
 			_timer.Interval = new TimeSpan(0, 0, 1);
@@ -67,6 +54,7 @@ namespace Tomater
 		private void ResetTimer()
 		{
 			_timer.Stop();
+			this.StopTickingSound();
 			TextRemainingTime.Text = "00:00";
 			_currentState = TimerState.Idle; ;
 			progressBar.Value = 0;
@@ -113,6 +101,7 @@ namespace Tomater
 		{
 			_timer.Stop();
 			this.FinishBell();
+			this.StopTickingSound();
 			await Task.Delay(3000);
 			switch(_currentState)
 			{
@@ -139,6 +128,16 @@ namespace Tomater
 			_soundPlayer.Play();
 		}
 
+		private void StartTickingSound()
+		{
+			_continousPlayer.PlayLooping();
+		}
+
+		private void StopTickingSound()
+		{
+			_continousPlayer.Stop();
+		}
+
 		private string FormatTime (TimeSpan span) {
 			return span.ToString("mm") + ":" + span.ToString("ss");
 		}
@@ -151,7 +150,8 @@ namespace Tomater
 			progressBar.Value = 0;
 			progressBar.Foreground = Brushes.Green;
 			_currentState = TimerState.Working;
-			StartBell();
+			//StartBell();
+			StartTickingSound();
 			_timer.Start();
 		}
 
@@ -160,6 +160,7 @@ namespace Tomater
 			_endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
 			TextRemainingTime.Text = "00:00";
 			StartBell();
+			this.StopTickingSound();
 			_timer.Start();
 		}
 
@@ -172,6 +173,7 @@ namespace Tomater
 			progressBar.Value = 0;
 			progressBar.Foreground = Brushes.Yellow;
 			_currentState = TimerState.ShortBreak;
+			this.StopTickingSound();
 			_timer.Start();
 		}
 

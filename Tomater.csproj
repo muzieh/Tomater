@@ -30,7 +30,7 @@
     <InstallUrl>http://tools.oversoft.pl/app/Tomater/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -61,10 +61,10 @@
     <ApplicationIcon>Tomato.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>58586571B26C6304FD039586B0FC24EEAC83F0E6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CDD5A82AB8BEBF9E9CE049320B5CD7FB3B54C3C5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Tomater_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Tomater.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -159,6 +159,9 @@
     <Resource Include="Tomato.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="tickingSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="controller.png" />
     <Resource Include="controller_add.png" />
     <Content Include="EndBell.wav">
