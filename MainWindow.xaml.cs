@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Media;
@@ -16,31 +14,28 @@ namespace Tomater
 	public partial class MainWindow : Window
 	{
 		private enum TimerState {Idle, Working, ShortBreak}
-		private DateTime _endTime;
-		private readonly DispatcherTimer _timer;
-		private readonly SoundPlayer _soundPlayer;
-		private readonly SoundPlayer _continousPlayer;
-		TomaterTimer _tomater;
-		private TimerState _currentState;
+		private DateTime endTime;
+		private readonly DispatcherTimer timer;
+		private readonly SoundPlayer soundPlayer;
+		TomaterTimer tomater;
+		private TimerState currentState;
 
-		private ShortBreakCommand _shortBreakCommand;
+		private ShortBreakCommand shortBreakCommand;
 
 		public MainWindow()
 		{
-			InitializeComponent();
-			_currentState = TimerState.Idle;
-			this.Loaded += new RoutedEventHandler(Window_Loaded);
-			this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-			TextRemainingTime.MouseLeftButtonDown += TextRemainingTime_MouseLeftButtonDown;
-			new StartCommand(WorkButton, this);
-			_shortBreakCommand = new ShortBreakCommand(ShortBreakButton, this);
+			this.InitializeComponent();
+			this.currentState = TimerState.Idle;
+			this.Loaded += new RoutedEventHandler(this.Window_Loaded);
+			this.MouseLeftButtonDown += this.MainWindow_MouseLeftButtonDown;
+			this.TextRemainingTime.MouseLeftButtonDown += this.TextRemainingTime_MouseLeftButtonDown;
+			new StartCommand(this.WorkButton, this);
+			this.shortBreakCommand = new ShortBreakCommand(this.ShortBreakButton, this);
 
-			_soundPlayer = new SoundPlayer();
-			_continousPlayer = new SoundPlayer(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"tickingSound.wav"));
-
-			_timer = new DispatcherTimer();
-			_timer.Tick += new EventHandler(TimerTick);
-			_timer.Interval = new TimeSpan(0, 0, 1);
+			this.soundPlayer = new SoundPlayer();
+			this.timer = new DispatcherTimer();
+			this.timer.Tick += new EventHandler(this.TimerTick);
+			this.timer.Interval = new TimeSpan(0, 0, 1);
 			this.ResetTimer();
 
 		}
@@ -53,17 +48,17 @@ namespace Tomater
 
 		private void ResetTimer()
 		{
-			_timer.Stop();
+			this.timer.Stop();
 			this.StopTickingSound();
-			TextRemainingTime.Text = "00:00";
-			_currentState = TimerState.Idle; ;
-			progressBar.Value = 0;
-			progressBar.Maximum = 100;
+			this.TextRemainingTime.Text = "00:00";
+			this.currentState = TimerState.Idle; ;
+			this.progressBar.Value = 0;
+			this.progressBar.Maximum = 100;
 		}
 
 		void MainWindow_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			DragMove();
+			this.DragMove();
 		}
  
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -76,40 +71,41 @@ namespace Tomater
 		public MainWindow(ITimer tomater)
 		{
 			// TODO: Complete member initialization
-			InitializeComponent();
-			_tomater = new TomaterTimer(tomater);
+			this.InitializeComponent();
+			this.tomater = new TomaterTimer(tomater);
 			//TextRemainingTime.Text = _tomater.RemainingTime.ToString();
 		}
 
 		void TimerTick(object sender, EventArgs e)
 		{
-			var delta = _endTime.Subtract(DateTime.Now);
+			var delta = this.endTime.Subtract(DateTime.Now);
 
 			if (delta.Seconds < 0 || delta.Minutes < 0)
 			{
-				ProcessTimerTick();
+				this.ProcessTimerTick();
 			}
 			else
 			{
-				TextRemainingTime.Foreground = Brushes.Black;
-				TextRemainingTime.Text = FormatTime(delta);
-				progressBar.Value = progressBar.Maximum - delta.TotalSeconds;
+				this.TextRemainingTime.Foreground = Brushes.Black;
+				this.TextRemainingTime.Text = this.FormatTime(delta);
+				this.progressBar.Value = this.progressBar.Maximum - delta.TotalSeconds;
 			}
 		}
 
 		async Task ProcessTimerTick()
 		{
-			_timer.Stop();
+			this.timer.Stop();
 			this.FinishBell();
-			this.StopTickingSound();
 			await Task.Delay(3000);
-			switch(_currentState)
+			switch(this.currentState)
 			{
 				case TimerState.Working:
 					this.ShortBreak();
 					break;
 				case TimerState.ShortBreak:
 					this.Work();
+					break;
+				case TimerState.Idle:
 					break;
 				default:
 					throw new Exception("not supported state");
@@ -118,24 +114,25 @@ namespace Tomater
 
 		private void FinishBell()
 		{
-			_soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"EndBell.wav");
-			_soundPlayer.Play();
+			this.soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"EndBell.wav");
+			this.soundPlayer.Play();
 		}
 
 		private void StartBell()
 		{
-			_soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"StartBell.wav");
-			_soundPlayer.Play();
+			this.soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"StartBell.wav");
+			this.soundPlayer.Play();
 		}
 
 		private void StartTickingSound()
 		{
-			_continousPlayer.PlayLooping();
+			this.soundPlayer.SoundLocation = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"tickingSound.wav");
+			this.soundPlayer.PlayLooping();
 		}
 
 		private void StopTickingSound()
 		{
-			_continousPlayer.Stop();
+			this.soundPlayer.Stop();
 		}
 
 		private string FormatTime (TimeSpan span) {
@@ -144,37 +141,35 @@ namespace Tomater
 
 		public void Work()
 		{
-			_endTime = DateTime.Now.AddMinutes(25).AddSeconds(5);
-			TextRemainingTime.Text = "00:00";
-			progressBar.Maximum = 25 * 60;
-			progressBar.Value = 0;
-			progressBar.Foreground = Brushes.Green;
-			_currentState = TimerState.Working;
-			//StartBell();
-			StartTickingSound();
-			_timer.Start();
+			int workMinutes = 25;
+			this.endTime = DateTime.Now.AddMinutes(workMinutes).AddSeconds(5);
+			this.TextRemainingTime.Text = "00:00";
+			this.progressBar.Maximum = workMinutes * 60;
+			this.progressBar.Value = 0;
+			this.progressBar.Foreground = Brushes.Green;
+			this.currentState = TimerState.Working;
+			this.StartTickingSound();
+			this.timer.Start();
 		}
 
 		private void ButtonLongClick(object sender, RoutedEventArgs e)
 		{
-			_endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
-			TextRemainingTime.Text = "00:00";
-			StartBell();
-			this.StopTickingSound();
-			_timer.Start();
+			this.endTime = DateTime.Now.AddMinutes(20).AddSeconds(5);
+			this.TextRemainingTime.Text = "00:00";
+			this.StartBell();
+			this.timer.Start();
 		}
 
 		public void ShortBreak()
 		{
-			_endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
-			TextRemainingTime.Text = "00:00";
-			StartBell();
-			progressBar.Maximum = 5 * 60;
-			progressBar.Value = 0;
-			progressBar.Foreground = Brushes.Yellow;
-			_currentState = TimerState.ShortBreak;
-			this.StopTickingSound();
-			_timer.Start();
+			this.endTime = DateTime.Now.AddMinutes(5).AddSeconds(5);
+			this.TextRemainingTime.Text = "00:00";
+			this.StartBell();
+			this.progressBar.Maximum = 5 * 60;
+			this.progressBar.Value = 0;
+			this.progressBar.Foreground = Brushes.Yellow;
+			this.currentState = TimerState.ShortBreak;
+			this.timer.Start();
 		}
 
 		private void ButtonVoidClick(object sender, RoutedEventArgs e)

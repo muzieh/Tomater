@@ -61,10 +61,10 @@
     <ApplicationIcon>Tomato.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CDD5A82AB8BEBF9E9CE049320B5CD7FB3B54C3C5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6BD692FD0F22AFFFC66DAFA42D8A7358F619A11A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Tomater.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Tomater_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -76,7 +76,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Tomater.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -152,7 +153,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Tomater.pfx" />
     <None Include="Tomater_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
